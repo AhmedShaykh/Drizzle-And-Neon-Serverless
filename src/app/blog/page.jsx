@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "./card";
 import getDomain from "@/lib/getDomain";
 
 async function getData() {
@@ -31,11 +32,10 @@ const Blog = async () => {
         <div className="flex flex-col items-center gap-8 my-8">
             {items && items.map((item, i) => {
                 return (
-                    <li
+                    <Card
                         key={`post-${i}`}
-                    >
-                        {item.title}
-                    </li>
+                        title={item.title}
+                    />
                 )
             })}
         </div>
