@@ -4,7 +4,7 @@ async function getData() {
 
     const endpoint = "http://localhost:3000/api/posts";
 
-    const res = await fetch(endpoint, { cache: "no-store" });
+    const res = await fetch(endpoint);
 
     if (!res.ok) {
         throw new Error("Failed To Fetch Data");

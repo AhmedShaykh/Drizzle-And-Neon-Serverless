@@ -9,5 +9,4 @@ export async function GET() {
             { id: 3, title: "Hello Yaseen" }
         ]
     });
-
 };
