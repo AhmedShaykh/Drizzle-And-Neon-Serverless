@@ -13,6 +13,10 @@ async function getData() {
         throw new Error("Failed To Fetch Data");
     }
 
+    if (res.headers.get("content-type") !== "application/json") {
+        return { items: [] };
+    }
+
     return res.json();
 };
 
