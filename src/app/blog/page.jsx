@@ -8,21 +8,21 @@ async function getData() {
 
     const endpoint = `${domain}/api/posts`;
 
-    const res = await fetch(endpoint, { cache: 'no-store' });
+    const res = await fetch(endpoint);
 
     if (!res.ok) {
         throw new Error("Failed To Fetch Data");
     }
 
-    if (res.headers.get("content-type") !== "application/json") {
-        return { items: [] };
-    }
+    // if (res.headers.get("content-type") !== "application/json") {
+    //     return { items: [] };
+    // }
 
     return res.json();
 };
 
 
-const Blog = async () => {
+async function Blog() {
 
     const data = await getData();
 
