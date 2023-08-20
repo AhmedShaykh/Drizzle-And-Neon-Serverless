@@ -8,7 +8,7 @@ async function getData() {
 
     const endpoint = `${domain}/api/posts`;
 
-    const res = await fetch(endpoint);
+    const res = await fetch(endpoint, { cache: "no-store" });
 
     if (!res.ok) {
         throw new Error("Failed To Fetch Data");
@@ -19,6 +19,7 @@ async function getData() {
     }
 
     return res.json();
+
 };
 
 
