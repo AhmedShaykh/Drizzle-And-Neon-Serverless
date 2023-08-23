@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Alert, Label } from "flowbite-react";
+import { Alert } from "flowbite-react";
 
 const LinksCreateForm = () => {
 
-    const [results, setResults] = useState(null);
+    const [results, setResults] = useState("");
 
-    // const [message, setMessage] = useState(null);
+    const [message, setMessage] = useState(null);
 
     const handleForm = async (event) => {
 
@@ -34,10 +34,20 @@ const LinksCreateForm = () => {
 
         setResults(result);
 
+        if (didSubmit) {
+            didSubmit(result);
+        }
+
+        if (result.message) {
+            setMessage(result.message);
+        }
+
     };
 
     return (
         <>
+            {message && <Alert color="warning">{message}</Alert>}
+
             <form
                 className="flex flex-col"
                 onSubmit={handleForm}
@@ -55,7 +65,7 @@ const LinksCreateForm = () => {
                     className="bg-white py-2 px-3 text-black cursor-pointer"
                     type="submit"
                 >
-                    Shorten
+                    Sumbit
                 </button>
             </form>
         </>
