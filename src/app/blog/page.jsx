@@ -48,3 +48,8 @@ async function Blog() {
 };
 
 export default Blog;
+
+export const config = {
+    runtime: "edge",
+    regions: ["iad1"]
+};
