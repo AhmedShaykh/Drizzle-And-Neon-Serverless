@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./card";
+import { helloWorld } from "@/lib/db";
 import getDomain from "@/lib/getDomain";
 
 async function getData() {
@@ -19,13 +20,16 @@ async function getData() {
     }
 
     return res.json();
-
 };
 
 
 async function Blog() {
 
     const data = await getData();
+
+    const dbHello = await helloWorld();
+
+    console.log(dbHello);
 
     const items = data && data.items ? [...data.items] : [];
 
