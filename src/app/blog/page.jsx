@@ -49,7 +49,6 @@ async function Blog() {
 
 export default Blog;
 
-export const config = {
-    runtime: "edge",
-    regions: ["iad1"]
-};
+export const runtime = "edge";
+
+export const prefferedRegion = "iad1";
