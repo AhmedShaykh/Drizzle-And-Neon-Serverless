@@ -12,11 +12,13 @@ export async function helloWorld() {
 };
 
 async function configureDatabase() {
+
     sql`CREATE TABLE IF NOT EXISTS "links" (
         "id" serial PRIMARY KEY NOT NULL,
         "url" text NOT NULL,
         "created_at" timestamp DEFAULT now()
     );`
+
 };
 
 configureDatabase().catch(err => console.log("Error " + err));
