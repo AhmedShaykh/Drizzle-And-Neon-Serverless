@@ -6,7 +6,7 @@ export async function GET() {
         items: [
             { id: 1, title: "Hello Bilal" },
             { id: 2, title: "Hello Ahmed" },
-            { id: 3, title: "Hello Yaseen" }
+            { id: 3, title: "Hello Suleman" }
         ]
     });
 };

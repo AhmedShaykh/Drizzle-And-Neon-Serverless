@@ -20,7 +20,7 @@ const Card = ({ title }) => {
             <h1 onClick={handleClick}>
                 {title}
             </h1>
-            <h2>
+            <h2 className="text-center my-2">
                 {count}
             </h2>
         </div>
