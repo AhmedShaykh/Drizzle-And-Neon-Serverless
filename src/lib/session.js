@@ -1,9 +1,7 @@
 import { cookies } from "next/headers";
 import * as jose from "jose";
 
-SESSION_KEY = "D682B3E5D47AAF666F1CE5492AF4E";
-
-const secret = jose.base64url.decode(SESSION_KEY);
+const secret = jose.base64url.decode(process.env.SESSION_KEY);
 
 const issuer = "urn:ahmx:issuer";
 
@@ -34,17 +32,17 @@ export const decodeUserSession = async (jwt) => {
     return payload;
 };
 
-async function verifySession() {
+// async function verifySession() {
 
-    const userId = "16788";
+//     const userId = "16788";
 
-    const jwtToken = await encodeUserSession(userId);
+//     const jwtToken = await encodeUserSession(userId);
 
-    const payload = await decodeUserSession(jwtToken);
+//     const payload = await decodeUserSession(jwtToken);
 
-    const { user } = payload;
+//     const { user } = payload;
 
-    console.log(user, payload, userId === user);
-};
+//     console.log(user, payload, userId === user);
+// };
 
-verifySession().then(x => console.log(x, " Verify")).catch(err => console.log(err));
+// verifySession().then(x => console.log(x, " Verify")).catch(err => console.log(err));
