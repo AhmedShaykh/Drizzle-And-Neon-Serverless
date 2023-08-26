@@ -8,11 +8,13 @@ const GithubProfile = () => {
 
     const myGithubRepoProfile = "https://api.github.com/users/AhmedShaykh/repos";
 
-    const { data, error, isLoading } = useSWR(myGithubRepoProfile, fetcher);
+    const { data, error, isLoading } = useSWR(myGithubRepoProfile, fetcher,
+        { refreshInterval: 1000 }
+    );
 
-    if (error) return "Error";
+    if (error) return <div className="flex justify-center my-3">Error</div>;
 
-    if (isLoading) return "Loading...";
+    if (isLoading) return <div className="flex justify-center my-3">Loading..</div>;
 
     return (
         <div className="flex flex-col items-center gap-y-4 my-3">
