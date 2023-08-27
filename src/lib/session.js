@@ -24,12 +24,24 @@ export const encodeUserSession = async (userId) => {
 
 export const decodeUserSession = async (jwt) => {
 
-    const { payload } = await jose.jwtDecrypt(jwt, secret, {
-        issuer: issuer,
-        audience: audience
-    });
+    try {
 
-    return payload;
+        const { payload } = await jose.jwtDecrypt(jwt, secret, {
+            issuer: issuer,
+            audience: audience,
+        });
+
+        const { user } = payload;
+
+        return user;
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+    return null;
 };
 
 // async function verifySession() {
@@ -46,3 +58,27 @@ export const decodeUserSession = async (jwt) => {
 // };
 
 // verifySession().then(x => console.log(x, " Verify")).catch(err => console.log(err));
+
+export const setSessionUser = async (userId) => {
+
+    const newSessionValue = await encodeUserSession(userId);
+
+    cookies().set("session_id", newSessionValue);
+};
+
+export const getSessionUser = async () => {
+
+    const cookieSessionValue = cookies().get("session_id");
+
+    if (!cookieSessionValue) {
+        return null;
+    }
+
+    const extractedUserId = await decodeUserSession(cookieSessionValue.value);
+
+    if (!extractedUserId) {
+        return null;
+    }
+
+    return extractedUserId;
+};

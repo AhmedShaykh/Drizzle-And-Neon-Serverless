@@ -1,6 +1,9 @@
+import { setSessionUser } from "@/lib/session";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+
+    await setSessionUser(1);
 
     return NextResponse.json({
         items: [
