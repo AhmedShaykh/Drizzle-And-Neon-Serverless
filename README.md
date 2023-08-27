@@ -1,1 +1,1 @@
-# Drizzle And Neon CRUD App!
+# Drizzle And Neon!

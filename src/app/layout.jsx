@@ -4,8 +4,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Drizzle And Neon CRUD App",
-  description: "Drizzle And Neon CRUD App",
+  title: "Drizzle And Neon",
+  description: "Drizzle And Neon",
 };
 
 export default function RootLayout({ children }) {
