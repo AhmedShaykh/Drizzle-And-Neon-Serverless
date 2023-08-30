@@ -1,3 +1,5 @@
+import { ThemeProvider } from "@/Components/ThemeProvider";
+import { ModeToggle } from "@/Components/ModeToggle";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -17,9 +19,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-zinc-950 text-slate-200`}
+        className={`${inter.className} dark:bg-zinc-900`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          {children}
+          <ModeToggle />
+        </ThemeProvider>
       </body>
     </html>
   )
