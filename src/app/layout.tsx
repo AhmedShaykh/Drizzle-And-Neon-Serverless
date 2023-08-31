@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/Components/ThemeProvider";
 import { ModeToggle } from "@/Components/ModeToggle";
+import { Toaster } from "@/Components/ui/toaster";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -24,6 +25,7 @@ export default function RootLayout({
           <div className="absolute top-6 right-6">
             <ModeToggle />
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html >

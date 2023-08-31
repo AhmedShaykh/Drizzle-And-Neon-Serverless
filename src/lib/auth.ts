@@ -19,3 +19,5 @@ export const authOptions: NextAuthOptions = {
         signIn: "/signin",
     },
 };
+
+export const getAuthSession = () => getServerSession(authOptions);
