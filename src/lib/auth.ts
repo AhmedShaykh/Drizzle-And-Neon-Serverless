@@ -9,6 +9,7 @@ import "dotenv/config";
 
 export const authOptions: NextAuthOptions = {
     adapter: DrizzleAdapter(db),
+    secret: process.env.NEXTAUTH_SECRET!,
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -18,6 +19,17 @@ export const authOptions: NextAuthOptions = {
     pages: {
         signIn: "/signin",
     },
+    session: {
+        strategy: "jwt",
+    },
+    callbacks: {
+        async session({ session, token }) {
+            return session;
+        },
+        async jwt({ token }) {
+            return token;
+        }
+    }
 };
 
 export const getAuthSession = () => getServerSession(authOptions);

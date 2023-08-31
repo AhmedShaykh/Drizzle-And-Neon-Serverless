@@ -4,6 +4,7 @@ import {
     text,
     primaryKey,
     integer,
+    uuid,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 
@@ -13,6 +14,7 @@ export const users = pgTable("user", {
     email: text("email").notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
+    username: text("username").unique(),
 });
 
 export const accounts = pgTable(
@@ -56,3 +58,12 @@ export const verificationTokens = pgTable(
         compoundKey: primaryKey(vt.identifier, vt.token),
     })
 );
+
+export const threads = pgTable("thread", {
+    id: uuid("id").defaultRandom().primaryKey(),
+    text: text("text").notNull(),
+    userId: text("user_id").notNull(),
+    createdAt: timestamp("created_at", { mode: "date" }).defaultNow(),
+    parentId: text("parent_id"),
+    dialogue_id: uuid("dialogue_id"),
+});
