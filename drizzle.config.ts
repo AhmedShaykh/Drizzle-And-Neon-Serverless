@@ -5,6 +5,6 @@ export default {
     driver: "pg",
     out: "./src/migration",
     dbCredentials: {
-        connectionString: process.env.DATABASE_URL!
+        connectionString: "postgres://ahmed.shaykhwork:PrGuyFT8t5BY@ep-solitary-night-48233370-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
     },
 } satisfies Config;
