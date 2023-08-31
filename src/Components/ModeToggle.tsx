@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -32,9 +31,6 @@ export function ModeToggle() {
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setTheme("dark")}>
                     Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                    System
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
