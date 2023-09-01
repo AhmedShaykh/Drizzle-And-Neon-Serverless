@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@/Components/ThemeProvider";
 import { ModeToggle } from "@/Components/ModeToggle";
-import { Toaster } from "@/Components/ui/toaster";
+import ClientToast from "@/Components/ClientToast";
 import Sidebar from "@/Components/Sidebar";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
@@ -21,7 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
           <div className="h-screen">
             <div className="grid grid-cols-4 h-full">
               <Sidebar />
@@ -30,12 +34,10 @@ export default function RootLayout({
               >
                 {children}
               </div>
-              <div className="absolute top-6 right-6">
-                <ModeToggle />
-              </div>
             </div>
           </div>
-          <Toaster />
+          <ClientToast />
+          <ModeToggle />
         </ThemeProvider>
       </body>
     </html >
