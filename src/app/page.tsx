@@ -6,9 +6,7 @@ const Home = () => {
 
     return (
         <div className="flex min-h-screen p-20 flex-col items-center justify-start">
-            <pre className="mt-20">
-                {JSON.stringify(session, null, 2)}
-            </pre>
+
         </div>
     )
 };
