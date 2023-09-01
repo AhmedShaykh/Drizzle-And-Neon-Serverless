@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import TextArea from "./TextArea";
+import { Button } from "./ui/button";
 import { addThreadsSchema } from "@/validations/Form";
 import {
     Form,
@@ -8,7 +10,6 @@ import {
     FormItem,
     FormMessage
 } from "./ui/form";
-import { Button } from "./ui/button";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -16,6 +17,10 @@ import { Session } from "next-auth";
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
+import { X } from "lucide-react";
+import { addThreadsAction } from "@/app/_actions/thread";
+import { toast } from "sonner";
+import { catchError } from "@/lib/utils";
 
 const AddForm = ({
     session
@@ -24,10 +29,23 @@ const AddForm = ({
 }) => {
 
     async function onSubmit(data: z.infer<typeof addThreadsSchema>) {
-        console.log(data);
+
+        try {
+
+            await addThreadsAction(data);
+
+            toast.success("Thread added successfully");
+
+            form.reset();
+
+        } catch (error) {
+
+            catchError(error);
+
+        }
     };
 
-    const [dialogueId, setDialogueId] = useState(uuidv4());
+    const [dialogueId] = useState(uuidv4());
 
     const form = useForm<z.infer<typeof addThreadsSchema>>({
         resolver: zodResolver(addThreadsSchema),
@@ -65,8 +83,7 @@ const AddForm = ({
                                 key={field.id}
                                 className="relative"
                             >
-                                <div className="h-20 w-[2px] absolute left-8 top-6 -z-10 bg-gray-700/40" />
-
+                                <div className="h-20 w-[2px] absolute left-8 top-6 -z-10 bg-gray-700/40"></div>
                                 <FormField
                                     control={form.control}
                                     name={`threads.${index}.text`}
@@ -79,19 +96,15 @@ const AddForm = ({
                                                         width={50}
                                                         height={50}
                                                         alt="profile_pic"
-                                                        src={
-                                                            // session?.user.image ??
-                                                            "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
-                                                        }
+                                                        src={"https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"}
                                                     />
                                                 </div>
                                                 <div className="flex flex-col w-full">
                                                     <div>
-                                                        @
-                                                        {/* {session?.user.username} */}
+                                                        @ User
                                                     </div>
-                                                    <FormControl className="w-full">
-                                                        {/* <TextArea
+                                                    <FormControl className="w-full my-4">
+                                                        <TextArea
                                                             placeholder="Add thread"
                                                             name={field.name}
                                                             onBlur={
@@ -101,11 +114,23 @@ const AddForm = ({
                                                                 field.onChange
                                                             }
                                                             value={field.value}
-                                                            className="text-area-thread placeholder:text-red-400 w-full"
-                                                        /> */}
+                                                            className="text-area-thread placeholder:text-red-400 w-full text-white dark:text-black bg-zinc-900 dark:bg-white"
+                                                        />
                                                     </FormControl>
                                                 </div>
+                                                {index > 0 && (
+                                                    <button
+                                                        onClick={() =>
+                                                            remove(index)
+                                                        }
+                                                        type={"button"}
+                                                        className="mr-4 absolute right-0"
+                                                    >
+                                                        <X className="text-gray-600"></X>
+                                                    </button>
+                                                )}
                                             </div>
+                                            <FormMessage className="m-4" />
                                         </FormItem>
                                     )}
                                 />
@@ -114,14 +139,14 @@ const AddForm = ({
                     })}
                 </div>
                 <Button
-                    className="py-3 px-8 font-medium bg-[#020817] dark:bg-white dark:text-black text-white rounded-md"
+                    className="flex justify-center mx-auto py-3 px-8 my-4 font-medium bg-[#020817] dark:bg-white dark:text-black text-white rounded-md"
                     type={"submit"}
                 >
                     Submit
                 </Button>
             </form>
             <Button
-                className="py-3 px-8 font-medium bg-[#020817] dark:bg-white dark:text-black text-white rounded-md"
+                className="py-3 px-8 flex justify-center my-2 font-medium bg-[#020817] dark:bg-white dark:text-black text-white rounded-md"
                 onClick={() => {
                     append({ text: "", dialogueId });
                 }}
