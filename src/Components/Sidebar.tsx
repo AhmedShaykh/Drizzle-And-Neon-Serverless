@@ -10,9 +10,9 @@ const Sidebar = async () => {
         <div className="flex flex-col">
             <div className="p-4 w-full justify-center">
                 {!session ? (
-                    <SignIn className="" />
+                    <SignIn className="mt-8" />
                 ) : (
-                    <SignOut />
+                    <SignOut className="mt-8" />
                 )}
             </div>
         </div>

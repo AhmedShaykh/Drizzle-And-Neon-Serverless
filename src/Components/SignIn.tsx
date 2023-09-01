@@ -9,7 +9,9 @@ import { toast } from "sonner";
 interface SignInWithGoogleProps
     extends HTMLAttributes<HTMLDivElement> { };
 
-const SignIn: FC<SignInWithGoogleProps> = ({ className, ...props }) => {
+const SignIn: FC<SignInWithGoogleProps> = (
+    { className, ...props }
+) => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
