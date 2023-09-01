@@ -25,7 +25,7 @@ const SignOut = (
                     }
                 }}
             >
-                <h1>Sign Out</h1>
+                <h1>Sign Out...</h1>
             </Button>
         </div>
     )
