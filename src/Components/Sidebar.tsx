@@ -1,5 +1,6 @@
-import React from "react";
 import { getAuthSession } from "@/lib/auth";
+import SignIn from "./SignIn";
+import SignOut from "./SignOut";
 
 const Sidebar = async () => {
 
@@ -9,9 +10,9 @@ const Sidebar = async () => {
         <div className="flex flex-col">
             <div className="p-4 w-full justify-center">
                 {!session ? (
-                    <h1>Sign In</h1>
+                    <SignIn className="" />
                 ) : (
-                    <h1>Sign Out</h1>
+                    <SignOut />
                 )}
             </div>
         </div>
