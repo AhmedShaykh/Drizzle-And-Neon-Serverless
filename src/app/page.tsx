@@ -1,3 +1,4 @@
+import AddForm from "@/Components/AddForm";
 import { getAuthSession } from "@/lib/auth";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
 
     return (
         <div className="flex min-h-screen p-20 flex-col items-center justify-start">
+            <AddForm session={session}></AddForm>
         </div >
     )
 };

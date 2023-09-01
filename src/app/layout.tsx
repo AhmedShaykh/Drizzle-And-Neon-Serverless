@@ -34,10 +34,12 @@ export default function RootLayout({
               >
                 {children}
               </div>
+              <div className="mt-16 mx-auto p-6">
+                <ModeToggle />
+              </div>
             </div>
           </div>
           <ClientToast />
-          <ModeToggle />
         </ThemeProvider>
       </body>
     </html >
