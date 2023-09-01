@@ -7,6 +7,7 @@ import {
     uuid,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
+import { InferModel, relations } from "drizzle-orm";
 
 export const users = pgTable("user", {
     id: text("id").notNull().primaryKey(),
@@ -14,8 +15,10 @@ export const users = pgTable("user", {
     email: text("email").notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
-    username: text("username").unique(),
+    username: text("username").unique()
 });
+
+export type User = InferModel<typeof users>;
 
 export const accounts = pgTable(
     "account",
@@ -32,10 +35,10 @@ export const accounts = pgTable(
         token_type: text("token_type"),
         scope: text("scope"),
         id_token: text("id_token"),
-        session_state: text("session_state"),
+        session_state: text("session_state")
     },
     (account) => ({
-        compoundKey: primaryKey(account.provider, account.providerAccountId),
+        compoundKey: primaryKey(account.provider, account.providerAccountId)
     })
 );
 
@@ -44,7 +47,7 @@ export const sessions = pgTable("session", {
     userId: text("userId")
         .notNull()
         .references(() => users.id, { onDelete: "cascade" }),
-    expires: timestamp("expires", { mode: "date" }).notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull()
 });
 
 export const verificationTokens = pgTable(
@@ -52,7 +55,7 @@ export const verificationTokens = pgTable(
     {
         identifier: text("identifier").notNull(),
         token: text("token").notNull(),
-        expires: timestamp("expires", { mode: "date" }).notNull(),
+        expires: timestamp("expires", { mode: "date" }).notNull()
     },
     (vt) => ({
         compoundKey: primaryKey(vt.identifier, vt.token),
@@ -65,5 +68,18 @@ export const threads = pgTable("thread", {
     userId: text("user_id").notNull(),
     createdAt: timestamp("created_at", { mode: "date" }).defaultNow(),
     parentId: text("parent_id"),
-    dialogue_id: uuid("dialogue_id"),
+    dialogue_id: uuid("dialogue_id")
 });
+
+export type Thread = InferModel<typeof threads>;
+
+export const threadsRelations = relations(threads, ({ one }) => ({
+    user: one(users, {
+        fields: [threads.userId],
+        references: [users.id]
+    })
+}));
+
+export const userRelations = relations(users, ({ many }) => ({
+    threads: many(threads)
+}));
