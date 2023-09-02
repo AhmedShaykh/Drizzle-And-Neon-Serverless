@@ -101,16 +101,23 @@ export async function getDialogueForThread(id: string) {
     const parentId_to_thread = new Map<string, typeof thread>();
 
     dialogue.forEach((thread) => {
+
         parentId_to_thread.set(thread.parentId!, thread);
+
     });
 
     let current_thread_parent_id = thread.id;
 
     while (current_thread_parent_id) {
+
         const current_thread = parentId_to_thread.get(current_thread_parent_id);
+
         if (!current_thread) break;
+
         ordered_threads.push(current_thread);
+
         parentId_to_thread.delete(current_thread_parent_id);
+
         current_thread_parent_id = current_thread.id;
     };
 

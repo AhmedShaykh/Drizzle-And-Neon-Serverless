@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { addThreadsAction } from "@/app/_actions/thread";
+import { catchError } from "@/lib/utils";
 import TextArea from "./TextArea";
 import { Button } from "./ui/button";
 import { addThreadsSchema } from "@/validations/Form";
@@ -18,9 +20,7 @@ import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 import { X } from "lucide-react";
-import { addThreadsAction } from "@/app/_actions/thread";
 import { toast } from "sonner";
-import { catchError } from "@/lib/utils";
 
 const AddForm = ({
     session
@@ -105,7 +105,7 @@ const AddForm = ({
                                                 </div>
                                                 <div className="flex flex-col w-full">
                                                     <div>
-                                                        @ {session?.user.username}
+                                                        @{session?.user.username}
                                                     </div>
                                                     <FormControl className="w-full my-4">
                                                         <TextArea

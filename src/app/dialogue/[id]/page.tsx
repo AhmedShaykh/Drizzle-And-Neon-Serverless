@@ -1,5 +1,5 @@
-import React from "react";
 import { getDialogueForThread } from "@/app/_actions/thread";
+import RepliesComponent from "@/Components/RepliesComponent";
 import Image from "next/image";
 
 const Dialogue = async ({
@@ -31,36 +31,36 @@ const Dialogue = async ({
                                 "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
                             }
                         />
+
                         <p className="text-sm font-semibold">
                             @{main_thread?.user?.username}
                         </p>
                     </div>
+
                     <div>
                         <p className="text-lg">{main_thread?.text}</p>
                     </div>
                 </div>
             </div>
 
-            {/* {replies.length > 1 && (
-                <div className="flex flex-col border-y-[1px] py-4">
-                    {replies.map((message, index) => {
-                        return (
-                            <RepliesComponent
-                                index={index}
-                                length={replies.length}
-                                key={message.id}
-                                id={message.id}
-                                username={message.user.username ?? ""}
-                                image={
-                                    message.user.image ??
-                                    "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
-                                }
-                                text={message.text}
-                            />
-                        );
-                    })}
-                </div>
-            )} */}
+            <div className="flex flex-col border-y-[1px] py-4">
+                {replies.map((message, index) => {
+                    return (
+                        <RepliesComponent
+                            index={index}
+                            length={replies.length}
+                            key={message.id}
+                            id={message.id}
+                            username={message.user.username ?? ""}
+                            image={
+                                message.user.image ??
+                                "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+                            }
+                            text={message.text}
+                        />
+                    );
+                })}
+            </div>
         </div>
     )
 };

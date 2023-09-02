@@ -26,10 +26,10 @@ const ThreadList = ({
                             <Link href={`/dialogue/${thread.id}`}>
                                 <CardHeader>
                                     <div className="text-lg">
-                                        Name: User
+                                        @{thread.user.username?.toLowerCase()}
                                     </div>
                                     <p className="text-lg">
-                                        Message: {thread.text}
+                                        {thread.text}
                                     </p>
                                 </CardHeader>
                             </Link>
