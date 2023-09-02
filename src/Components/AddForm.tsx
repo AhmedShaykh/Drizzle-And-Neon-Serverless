@@ -83,7 +83,8 @@ const AddForm = ({
                                 key={field.id}
                                 className="relative"
                             >
-                                <div className="h-20 w-[2px] absolute left-8 top-6 -z-10 bg-gray-700/40"></div>
+                                <div className="h-20 w-[2px] absolute left-8 top-6 -z-10 bg-gray-700/40" />
+
                                 <FormField
                                     control={form.control}
                                     name={`threads.${index}.text`}
@@ -96,12 +97,15 @@ const AddForm = ({
                                                         width={50}
                                                         height={50}
                                                         alt="profile_pic"
-                                                        src={"https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"}
+                                                        src={
+                                                            session?.user.image ??
+                                                            "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+                                                        }
                                                     />
                                                 </div>
                                                 <div className="flex flex-col w-full">
                                                     <div>
-                                                        @ User
+                                                        @ {session?.user.username}
                                                     </div>
                                                     <FormControl className="w-full my-4">
                                                         <TextArea
