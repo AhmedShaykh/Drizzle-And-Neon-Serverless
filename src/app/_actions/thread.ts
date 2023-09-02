@@ -74,7 +74,7 @@ export async function getDialogueForThread(id: string) {
         }
     });
 
-    if (!thread) throw Error("No thread found");
+    if (!thread) throw new Error("No thread found");
 
     const dialogue_id = thread?.dialogue_id;
 

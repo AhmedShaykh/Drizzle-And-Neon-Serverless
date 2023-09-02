@@ -43,24 +43,24 @@ const Dialogue = async ({
                 </div>
             </div>
 
-            <div className="flex flex-col border-y-[1px] py-4">
-                {replies.map((message, index) => {
-                    return (
-                        <RepliesComponent
-                            index={index}
-                            length={replies.length}
-                            key={message.id}
-                            id={message.id}
-                            username={message.user.username ?? ""}
-                            image={
-                                message.user.image ??
-                                "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
-                            }
-                            text={message.text}
-                        />
-                    );
-                })}
-            </div>
+            {replies.length >= 1 && (
+                <div className="flex flex-col border-y-[1px] py-4">
+                    {replies.map((message) => {
+                        return (
+                            <RepliesComponent
+                                key={message.id}
+                                id={message.id}
+                                username={message.user.username ?? ""}
+                                image={
+                                    message.user.image ??
+                                    "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg"
+                                }
+                                text={message.text}
+                            />
+                        );
+                    })}
+                </div>
+            )}
         </div>
     )
 };
